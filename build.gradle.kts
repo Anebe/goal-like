@@ -21,6 +21,10 @@ repositories {
 }
 
 dependencies {
+	implementation("com.google.api-client:google-api-client:1.25.0")
+	implementation("com.google.apis:google-api-services-youtube:v3-rev222-1.25.0")
+
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-h2console")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")

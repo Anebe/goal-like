@@ -1,0 +1,29 @@
+spring.config:
+  import: secrets.yml
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: ${mailtrap.username}
+    password: ${mailtrap.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
