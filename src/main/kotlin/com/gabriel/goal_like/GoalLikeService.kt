@@ -1,39 +1,39 @@
 package com.gabriel.goal_like
 
-import com.gabriel.goal_like.database.GoalLikeRepository
+import com.gabriel.goal_like.database.GoalRepository
 import com.gabriel.goal_like.content.YoutubeClient
-import com.gabriel.goal_like.database.GoalStatus
-import com.gabriel.goal_like.notification.Notifier
-import org.springframework.stereotype.Component
+import com.gabriel.goal_like.database.GoalEntity
+import com.gabriel.goal_like.domain.GoalStatus
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 
 @Service
 class GoalLikeService(
-    private val goalLikeRepository: GoalLikeRepository,
-    private val notifier: Notifier,
-    private val youtubeClient: YoutubeClient//TODO trocar por interface
+    private val goalRepository: GoalRepository,
+    private val youtubeClient: YoutubeClient,//TODO trocar por interface
+    private val publiser: ApplicationEventPublisher,
 ) {
 
     fun process(){
-        //TODO melhorar a combinação das duas collection(ex:refatorar findall pra map<videoid,video>, criar class que junta as duas)
-        val goals = goalLikeRepository.findAll()
+        val goalsEntity = goalRepository.findAll()
 
-        if (goals.isEmpty())
+        if (goalsEntity.isEmpty())
             return
 
-        val videosIds = goals
+        val videosIds = goalsEntity
             .filter { it.status == GoalStatus.ACTIVE }
             .map { it.videoId }.toList()
 
         val videosLikes = youtubeClient.howManyLikesOfVideos(videosIds)
-        for (goal in goals) {
+        for (goalEntity in goalsEntity) {
+            val goal = goalEntity.to()
             val likeqtd  = videosLikes[goal.videoId]?: continue
-            val goalLike = goal.goalLikeQtd
-            if (likeqtd > goalLike){
-                val updateGoal = goal.copy(status = GoalStatus.COMPLETED)
-                goalLikeRepository.save(updateGoal)
-                notifier.sendNotification()//TODO remover daqui e tornar independer e async
-            }
+
+            goal.check(likeqtd, { goalEvent ->
+                publiser.publishEvent(goalEvent)
+                goalRepository.save(GoalEntity(goal))
+            })
+
         }
     }
 }

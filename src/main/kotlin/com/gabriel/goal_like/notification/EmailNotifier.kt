@@ -1,24 +1,27 @@
 package com.gabriel.goal_like.notification
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import com.gabriel.goal_like.database.ContentCreatorRepository
+import org.springframework.context.annotation.Scope
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Component
 
-
+@Component
+@Scope("prototype")
 class EmailNotifier(
-    private val mailSender: JavaMailSender
+    private val mailSender: JavaMailSender,
+    private val contentCreatorRepository: ContentCreatorRepository
 ): Notifier {
-    override fun sendNotification() {
-        sendSimpleEmail("gabriel2001barros@gmail.com", "META ATINGIDA", "FOI")
+    override val tipo = ChannelType.EMAIL
+
+    override fun sendNotification(to: String, message: Message) {
+        val mailMessage = SimpleMailMessage()
+        mailMessage.setTo(to)
+        mailMessage.subject = message.title
+        mailMessage.text = message.body
+
+        mailSender.send(mailMessage)
     }
 
-    private fun sendSimpleEmail(to: String, subject: String, text: String) {
-        val message = SimpleMailMessage()
-        message.setTo(to)
-        message.subject = subject
-        message.text = text
 
-        mailSender.send(message)
-    }
 }

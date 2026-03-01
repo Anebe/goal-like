@@ -24,6 +24,10 @@ dependencies {
 	implementation("com.google.api-client:google-api-client:1.25.0")
 	implementation("com.google.apis:google-api-services-youtube:v3-rev222-1.25.0")
 
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
+	implementation("org.springframework.boot:spring-boot-starter-hateoas")
+
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-h2console")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
