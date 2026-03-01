@@ -12,7 +12,11 @@ VALUES ('joao@email.com',
         '550e8400-e29b-41d4-a716-446655440002'),
        ('um contato qualquer',
         'MOCK',
+        '550e8400-e29b-41d4-a716-446655440001'),
+       ('478688163460546560',
+        'DISCORD',
         '550e8400-e29b-41d4-a716-446655440001');
+
 INSERT INTO goal_entity (id,
                   name,
                   description,
@@ -25,7 +29,7 @@ VALUES ('550e8400-e29b-41d4-a716-446655440000',
         'Meta para alcançar 1000 likes no vídeo',
         '5Rf0FZD2iPI',
         'ACTIVE',
-        'MOCK',
+        'DISCORD',
         '550e8400-e29b-41d4-a716-446655440001');
 INSERT INTO target_entity (amount, type, goal_id, status)
 VALUES ('1000',
