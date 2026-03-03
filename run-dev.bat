@@ -1,0 +1,9 @@
+@echo off
+
+echo Starting Backend...
+start cmd /k "cd goal-like-backend && gradlew bootRun"
+
+echo Starting Frontend...
+start cmd /k "cd goal-like-frontend && npm run dev"
+
+echo Applications starting...
