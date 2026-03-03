@@ -3,6 +3,9 @@ VALUES ('550e8400-e29b-41d4-a716-446655440001',
         'João Silva'),
        ('550e8400-e29b-41d4-a716-446655440002',
         'Gabriel aaaa');
+INSERT INTO content_creator (id, full_name, auth_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440003',
+        'Admin da Silva', 'XH2cWXXwa7SP6sG26PbWUTP7e7t2');
 INSERT INTO contact (contact, type, content_creator_id)
 VALUES ('joao@email.com',
         'EMAIL',
@@ -29,7 +32,7 @@ VALUES ('550e8400-e29b-41d4-a716-446655440000',
         'Meta para alcançar 1000 likes no vídeo',
         '5Rf0FZD2iPI',
         'ACTIVE',
-        'DISCORD',
+        'MOCK',
         '550e8400-e29b-41d4-a716-446655440001');
 INSERT INTO target_entity (amount, type, goal_id, status)
 VALUES ('1000',

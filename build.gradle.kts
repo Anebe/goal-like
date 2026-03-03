@@ -28,6 +28,9 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server")
+	testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server-test")
+	implementation("com.google.firebase:firebase-admin:9.2.0")
 
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-h2console")

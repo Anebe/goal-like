@@ -11,6 +11,10 @@ import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
 import kotlin.jvm.java
 
+
+//TODO pensar em uma maneira de guardar o link de permisão do usuario
+//TODO tratar exception(caso o usuario não tenha dado permissão pro bot ou tenha removido ela)
+
 data class DiscordChannelResponse(
     val id: String,
     val type: Int

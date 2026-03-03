@@ -9,11 +9,10 @@ import com.gabriel.goal_like.domain.TargetStatus
 import com.gabriel.goal_like.domain.TargetType
 import com.gabriel.goal_like.notification.ChannelType
 import java.util.UUID
-import kotlin.collections.forEach
 
 data class ContentCreatorRequest(
     val fullName: String,
-    val contacts: MutableSet<ContactRequest> = mutableSetOf(),
+    val contacts: MutableSet<ContactOfCreatorRequest> = mutableSetOf(),
 ) {
     init {
         require(fullName.isNotBlank())
@@ -29,7 +28,7 @@ data class ContentCreatorRequest(
 
 
 
-data class ContactRequest(
+data class ContactOfCreatorRequest(
     val contact: String,
     val type: ChannelType,
 ) {
@@ -76,4 +75,29 @@ data class TargetRequest(
         status = TargetStatus.ACTIVE,
         goal = goalEntity
     )
+}
+
+data class SinginRequest(
+    val email: String,
+    val password: String,
+    val fullname: String,
+)
+
+data class AuthRequest(
+    val email: String,
+    val password: String,
+)
+
+data class ContactRequest(
+    val contact: String,
+    val type: ChannelType,
+    val contentCreatorId: UUID
+){
+    fun to(contentCreator: ContentCreator): Contact {
+        return Contact(
+            contact = contact,
+            type = type,
+            contentCreator = contentCreator
+        )
+    }
 }

@@ -3,12 +3,15 @@ package com.gabriel.goal_like.web.controller
 import com.gabriel.goal_like.database.ContactRepository
 import com.gabriel.goal_like.database.ContentCreatorRepository
 import com.gabriel.goal_like.database.GoalRepository
+import com.gabriel.goal_like.error.ResourceNotFoundException
 //import com.gabriel.goal_like.web.dto.ContactResponse
 //import com.gabriel.goal_like.web.dto.ContentCreatorModelAssembler
 import com.gabriel.goal_like.web.dto.ContentCreatorRequest
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.data.rest.webmvc.RepositoryRestController
 import org.springframework.http.HttpStatus
+import org.springframework.security.core.Authentication
+import org.springframework.web.bind.annotation.GetMapping
 //import com.gabriel.goal_like.web.dto.ContentCreatorResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,6 +19,22 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
+
+
+@RestController
+@Tag(name = "Content Creator")
+class TesteContentCreatorController(
+    private val repository: ContentCreatorRepository,
+    private val contactRepository: ContactRepository,
+    private val goalRepository: GoalRepository,
+
+) {
+
+    @GetMapping("api/v1/content-creator/me")
+    fun get(auth: Authentication): String {
+        return repository.findByAuthId(auth.name)?.id.toString() 
+    }
+}
 
 //@RestController
 //@RequestMapping("content-creator")
@@ -25,7 +44,6 @@ class ContentCreatorController(
     private val repository: ContentCreatorRepository,
     private val contactRepository: ContactRepository,
     private val goalRepository: GoalRepository,
-//    private val assembler: ContentCreatorModelAssembler,
 ) {
 
     @PostMapping("content-creator")

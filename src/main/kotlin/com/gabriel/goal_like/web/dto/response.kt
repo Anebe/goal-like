@@ -26,3 +26,6 @@ import java.util.UUID
 //        type = contact.type
 //    )
 //}
+data class LoginResponse(
+    val id: UUID
+)

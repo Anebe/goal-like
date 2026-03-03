@@ -10,7 +10,14 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import org.springframework.data.rest.core.annotation.RestResource
+import org.springframework.data.rest.core.config.Projection
 
+@Projection(types = [Contact::class])
+interface ContactSummary{
+    val id: Long
+    val contact: String
+    val type: ChannelType
+}
 @Entity
 data class Contact(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

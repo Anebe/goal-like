@@ -28,7 +28,9 @@ class GoalController(
         @RequestBody goal: GoalRequest
     ) {
         val contentCreator = contentCreatorRepository.findById(goal.contentCreatorId).orElseThrow { BusinessRuleException("There needs to be a content creation associate!") }
-
+        if (!contentCreator.contacts.any{ goal.channel == it.type}) {
+            throw BusinessRuleException("The contact specified in the goal is not listed in the account.")
+        }
         goalRepository.save(goal.to(contentCreator))
     }
 }

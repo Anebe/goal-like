@@ -1,5 +1,6 @@
 package com.gabriel.goal_like.database
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.gabriel.goal_like.domain.TargetDomain
 import com.gabriel.goal_like.domain.TargetStatus
 import com.gabriel.goal_like.domain.TargetType
